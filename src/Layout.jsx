@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, createContext } from "react";
-import { ChevronDown, ChevronRight, Plus, User, Cpu } from "lucide-react";
+import { ChevronDown, ChevronRight, Plus, User, Cpu, Package } from "lucide-react";
 
 // Layout context
 export const LayoutContext = createContext({
@@ -150,8 +150,10 @@ export default function Layout({
                   );
                 })
               ) : (
-                <div className="flex items-start justify-center pt-4 text-gray-400 text-lg">
-                  Select or add a product
+                <div className="flex flex-col items-center justify-start pt-4 text-center">
+                  <Package size={32} className="text-gray-500 opacity-50 mb-4" />
+                  <p className="text-lg text-gray-400 mb-2">Select or add a product</p>
+                  <p className="text-sm text-gray-500">Choose a product from the sidebar or add a new one</p>
                 </div>
               )}
               <div ref={chatEndRef} />
