@@ -199,7 +199,7 @@ export default function Layout({
                   onChange={(e) => setSelectedProductId(e.target.value)}
                 >
                   <option value="">Select a product</option>
-                  {availableProducts
+                  {(availableProducts || [])
                     .filter((p) => !menuItems.find((existing) => existing.id === p.id))
                     .map((p) => (
                       <option key={p.id} value={p.id}>
