@@ -24,7 +24,7 @@ export default function App() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const res = await fetch("/products.json");
+        const res = await fetch(`${import.meta.env.BASE_URL}products.json`);
         const data = await res.json();
 
         const mappedProducts = data.map((p) => ({
@@ -95,7 +95,7 @@ export default function App() {
       if (manuals[currentProductId] !== undefined) return;
 
       try {
-        const res = await fetch(`/manuals/${currentProductId}.json`);
+        const res = await fetch(`${import.meta.env.BASE_URL}manuals/${currentProductId}.json`);
         if (!res.ok) throw new Error("Manual not found");
         const data = await res.json();
         setManuals((prev) => ({ ...prev, [currentProductId]: data }));
