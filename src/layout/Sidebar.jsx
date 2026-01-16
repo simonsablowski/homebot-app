@@ -54,9 +54,9 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`w-64 bg-gray-800 flex flex-col h-full transition-all duration-300 ${
-        sidebarOpen ? "block" : "hidden sm:block"
-      }`}
+      className={`bg-gray-800 flex flex-col h-full transition-all duration-300 ${
+        sidebarOpen ? "w-1/2 sm:w-64" : "w-0 sm:w-64"
+      } ${sidebarOpen ? "block" : "hidden sm:block"}`}
     >
       <nav className="flex-1 overflow-y-auto px-6 pt-4">
         {menuItems.map((item) => (

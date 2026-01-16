@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import ChatArea from "./ChatArea";
@@ -27,7 +27,35 @@ export default function Layout({
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 640; // Tailwind's sm breakpoint
+      setIsMobile(mobile);
+
+      // On mobile: hide sidebar if products exist and one is selected
+      if (mobile && menuItems.length > 0 && currentProductId) {
+        setSidebarOpen(false);
+      }
+      // On mobile: show sidebar if no products or none selected
+      else if (mobile && (menuItems.length === 0 || !currentProductId)) {
+        setSidebarOpen(true);
+      }
+      // On desktop: always show sidebar
+      else if (!mobile) {
+        setSidebarOpen(true);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [menuItems.length, currentProductId]);
+
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  // Determine if we should show the hamburger menu button
+  const showMenuButton = isMobile && menuItems.length > 0;
 
   return (
     <LayoutContext.Provider value={{ sidebarOpen, toggleSidebar, isMobile }}>
@@ -36,6 +64,7 @@ export default function Layout({
           onToggleSidebar={toggleSidebar}
           onLogoClick={() => setCurrentProductId("")}
           isMobile={isMobile}
+          showMenuButton={showMenuButton}
         />
 
         <div className="flex flex-1 overflow-hidden">

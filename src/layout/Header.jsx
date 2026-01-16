@@ -1,11 +1,11 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 
-export default function Header({ onToggleSidebar, onLogoClick, isMobile }) {
+export default function Header({ onToggleSidebar, onLogoClick, isMobile, showMenuButton }) {
   return (
     <header className="h-16 bg-cyan-600 border-b border-cyan-700 flex items-center justify-between px-6">
       <div className="flex items-center gap-3">
-        {isMobile && (
+        {showMenuButton && (
           <button className="text-white sm:hidden" onClick={onToggleSidebar}>
             <ChevronDown size={20} />
           </button>
