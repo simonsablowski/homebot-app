@@ -22,7 +22,8 @@ export default function AddProductModal({
       <div className="bg-white rounded p-6 w-96" onClick={(e) => e.stopPropagation()}>
         <h2 className="text-lg font-semibold mb-4">Add product</h2>
 
-        <label className="block mb-3 text-sm font-medium">Choose product</label>
+        {/*<label className="block mb-3 text-sm font-medium">Choose product</label>*/}
+
         <div className="relative mb-4">
           <select
             className="w-full border border-gray-300 rounded px-3 py-2 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
@@ -43,12 +44,12 @@ export default function AddProductModal({
           </div>
         </div>
 
-        <button
+        {/*<button
           disabled
           className="w-full px-4 py-2 bg-gray-400 text-white rounded mb-4 cursor-not-allowed"
         >
           Upload manual
-        </button>
+        </button>*/}
 
         <div className="flex justify-center gap-4 mt-2">
           <button onClick={onClose} className="w-32 px-4 py-2 border rounded">
