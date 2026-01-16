@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import homebotLogo from "../assets/homebot.svg";
 
 export default function Header({ onToggleSidebar, onLogoClick, isMobile, showMenuButton }) {
   return (
@@ -10,6 +11,13 @@ export default function Header({ onToggleSidebar, onLogoClick, isMobile, showMen
             <ChevronDown size={20} />
           </button>
         )}
+        {/* Logo */}
+        <img
+          src={homebotLogo}
+          alt="homebot logo"
+          className="h-10 w-10 cursor-pointer"
+          onClick={onLogoClick}
+        />
         <h1
           className="text-xl font-semibold text-white cursor-pointer"
           title="Go home"
