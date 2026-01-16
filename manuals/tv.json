@@ -1,0 +1,17 @@
+{
+  "productId": "tv",
+  "entries": [
+    {
+      "keyword": "reset",
+      "content": "To reset the TV, press and hold the power button on the remote for 10 seconds. Then, confirm on screen."
+    },
+    {
+      "keyword": "pair",
+      "content": "Hold the OK and Back buttons for 5 seconds to pair the remote."
+    },
+    {
+      "keyword": "wifi",
+      "content": "Open Settings > Network and select your Wi-Fi network. Enter the password to connect."
+    }
+  ]
+}

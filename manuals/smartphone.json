@@ -1,0 +1,13 @@
+{
+  "productId": "smartphone",
+  "entries": [
+    {
+      "keyword": "reset",
+      "content": "Go to Settings > System > Reset options > Erase all data (factory reset)."
+    },
+    {
+      "keyword": "screenshot",
+      "content": "Press and hold the Power button and Volume Down button simultaneously."
+    }
+  ]
+}

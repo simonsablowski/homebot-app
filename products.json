@@ -1,0 +1,11 @@
+[
+  { "id": "smartphone", "label": "smartphone", "icon": "Smartphone" },
+  { "id": "tv", "label": "TV", "icon": "Tv" },
+  { "id": "drill", "label": "drill", "icon": "Drill" },
+  { "id": "washing-machine", "label": "washing machine", "icon": "WashingMachine" },
+  { "id": "speaker", "label": "speaker", "icon": "Speaker" },
+  { "id": "printer", "label": "printer", "icon": "Printer" },
+  { "id": "lightbulb", "label": "lightbulb", "icon": "Lightbulb" },
+  { "id": "headphones", "label": "headphones", "icon": "Headphones" },
+  { "id": "wifi", "label": "wifi", "icon": "Wifi" }
+]
