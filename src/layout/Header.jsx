@@ -1,0 +1,29 @@
+import React from "react";
+import { ChevronDown } from "lucide-react";
+
+export default function Header({ onToggleSidebar, onLogoClick, isMobile }) {
+  return (
+    <header className="h-16 bg-cyan-600 border-b border-cyan-700 flex items-center justify-between px-6">
+      <div className="flex items-center gap-3">
+        {isMobile && (
+          <button className="text-white sm:hidden" onClick={onToggleSidebar}>
+            <ChevronDown size={20} />
+          </button>
+        )}
+        <h1
+          className="text-xl font-semibold text-white cursor-pointer"
+          title="Go home"
+          onClick={onLogoClick}
+        >
+          homebot
+        </h1>
+      </div>
+      <button
+        className="text-sm text-gray-300 opacity-50 cursor-not-allowed transition-colors"
+        title="Settings coming soon"
+      >
+        Settings
+      </button>
+    </header>
+  );
+}

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as LucideIcons from "lucide-react";
-import Layout from "./Layout";
+import Layout from "./layout/Layout";
+import {
+  restoreFromStorage,
+  saveProducts,
+  saveConversations,
+  saveCurrentProductId,
+} from "./utils/storage";
 
 export default function App() {
   const [availableProducts, setAvailableProducts] = useState([]);
@@ -37,40 +43,23 @@ export default function App() {
     loadProducts();
   }, []);
 
-  // 1. Restore products and conversations on initial load
+  // Restore products and conversations on initial load
   useEffect(() => {
     if (availableProducts.length === 0) return;
 
     try {
-      const storedProducts = localStorage.getItem("homebot.products");
-      const storedConversations = localStorage.getItem("homebot.conversations");
-      const storedProductId = localStorage.getItem("homebot.currentProductId");
+      const restored = restoreFromStorage(availableProducts);
 
-      if (storedProducts) {
-        const parsedProducts = JSON.parse(storedProducts);
-        const restoredProducts = parsedProducts
-          .map((p) => {
-            const original = availableProducts.find((ap) => ap.id === p.id);
-            if (!original) {
-              console.warn(`Could not find product ${p.id} in availableProducts`);
-              return null;
-            }
-            return {
-              id: original.id,
-              label: original.label,
-              icon: original.icon
-            };
-          })
-          .filter(Boolean);
-        setProducts(restoredProducts);
+      if (restored.products.length > 0) {
+        setProducts(restored.products);
       }
 
-      if (storedConversations) {
-        setConversations(JSON.parse(storedConversations));
+      if (Object.keys(restored.conversations).length > 0) {
+        setConversations(restored.conversations);
       }
 
-      if (storedProductId) {
-        setCurrentProductId(storedProductId);
+      if (restored.currentProductId) {
+        setCurrentProductId(restored.currentProductId);
       }
 
       setIsInitialLoad(false);
@@ -80,38 +69,22 @@ export default function App() {
     }
   }, [availableProducts]);
 
-  // 2. Save products to localStorage whenever they change
+  // Save products to localStorage whenever they change
   useEffect(() => {
     if (isInitialLoad) return;
-
-    if (products.length > 0) {
-      const productsToStore = products.map(({ icon, ...rest }) => rest);
-      localStorage.setItem("homebot.products", JSON.stringify(productsToStore));
-    } else {
-      localStorage.removeItem("homebot.products");
-    }
+    saveProducts(products);
   }, [products, isInitialLoad]);
 
-  // 3. Save conversations to localStorage whenever they change
+  // Save conversations to localStorage whenever they change
   useEffect(() => {
     if (isInitialLoad) return;
-
-    if (Object.keys(conversations).length > 0) {
-      localStorage.setItem("homebot.conversations", JSON.stringify(conversations));
-    } else {
-      localStorage.removeItem("homebot.conversations");
-    }
+    saveConversations(conversations);
   }, [conversations, isInitialLoad]);
 
-  // 4. Save selected product to localStorage whenever it changes
+  // Save selected product to localStorage whenever it changes
   useEffect(() => {
     if (isInitialLoad) return;
-
-    if (currentProductId) {
-      localStorage.setItem("homebot.currentProductId", currentProductId);
-    } else {
-      localStorage.removeItem("homebot.currentProductId");
-    }
+    saveCurrentProductId(currentProductId);
   }, [currentProductId, isInitialLoad]);
 
   // Load manual whenever the current product changes
